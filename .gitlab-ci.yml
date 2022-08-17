@@ -12,9 +12,12 @@ docker-build-master:
     - docker:20.10.17-dind
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - docker login -u "$DHUB_USER_ID" -p "$DHUB_USER_TOKEN"
   script:
     - docker build --pull -t "$CI_REGISTRY/$CI_REGISTRY_IMAGE" .
+    - docker tag "$CI_REGISTRY/$CI_REGISTRY_IMAGE" "$DHUB_USER_ID/$CI_REGISTRY_IMAGE"
     - docker push "$CI_REGISTRY/$CI_REGISTRY_IMAGE"
+    - docker push "$DHUB_USER_ID/$CI_REGISTRY_IMAGE"
   only:
     - master
     - main
@@ -28,9 +31,12 @@ docker-build:
     - docker:20.10.17-dind
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - docker login -u "$DHUB_USER_ID" -p "$DHUB_USER_TOKEN"
   script:
     - docker build --pull -t "$CI_REGISTRY/$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG" .
+    - docker tag "$CI_REGISTRY/$CI_REGISTRY_IMAGE" "$DHUB_USER_ID/$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG"
     - docker push "$CI_REGISTRY/$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG"
+    - docker push "$DHUB_USER_ID/$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG"
   except:
     - master
     - main
