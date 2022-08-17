@@ -1,5 +1,5 @@
 # ESP-RS: Docker building image
-Docker image to build using ESP toolchain
+Docker image to build using ESP toolchain. You can find the docker entry [here](https://hub.docker.com/repository/docker/nassiel/esp-rs-docker).
 
 ## Usage
 
