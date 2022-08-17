@@ -1,7 +1,7 @@
-# esp-rs-docker
+# ESP-RS: Docker building image
 Docker image to build using ESP toolchain
 
-## Usage
+## Usage
 
 Create a Dockerfile with the next structure inside your rust esp-idf project:
 
